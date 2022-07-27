@@ -8,8 +8,42 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(20),
-        color: Colors.red,
+        child: Column(children: [
+          emailField(),
+          passwordField(),
+          SizedBox(
+            height: 20,
+          ),
+          submitbutton(),
+        ]),
       ),
+    );
+  }
+
+  emailField() {
+    return const TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        hintText: 'you@example.com',
+        labelText: 'Email Address',
+        hintStyle: TextStyle(color: Colors.grey),
+      ),
+    );
+  }
+
+  passwordField() {
+    return const TextField(
+      obscureText: false,
+      decoration: InputDecoration(
+          hintText: 'use strong password', labelText: 'Password'),
+    );
+  }
+
+  submitbutton() {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text('login'),
+      style: ElevatedButton.styleFrom(primary: Colors.red),
     );
   }
 }
