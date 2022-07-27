@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'blocs/bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -6,6 +7,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Log me in ')),
       body: Container(
         margin: EdgeInsets.all(20),
         child: Column(children: [
@@ -21,21 +23,38 @@ class LoginScreen extends StatelessWidget {
   }
 
   emailField() {
-    return const TextField(
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: 'you@example.com',
-        labelText: 'Email Address',
-        hintStyle: TextStyle(color: Colors.grey),
-      ),
+    return StreamBuilder(
+      stream: bloc.emailvalidation,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changeEmail,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            hintText: 'you@example.com',
+            labelText: 'Email Address',
+            hintStyle: TextStyle(color: Colors.grey),
+            errorText:
+                snapshot.error != null ? snapshot.error.toString() : null,
+          ),
+        );
+      },
     );
   }
 
   passwordField() {
-    return const TextField(
-      obscureText: false,
-      decoration: InputDecoration(
-          hintText: 'use strong password', labelText: 'Password'),
+    return StreamBuilder(
+      stream: bloc.passwordvalidation,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changePassword,
+          obscureText: false,
+          decoration: InputDecoration(
+              hintText: 'use strong password',
+              labelText: 'Password',
+              errorText:
+                  snapshot.error != null ? snapshot.error.toString() : null),
+        );
+      },
     );
   }
 
