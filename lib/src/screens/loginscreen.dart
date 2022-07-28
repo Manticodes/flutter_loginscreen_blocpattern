@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             height: 40,
           ),
           submitbutton(bloc),
-          message(bloc),
+          // message(bloc),  // it was  first method but i learned better method
         ]),
       ),
     );
@@ -67,9 +67,9 @@ class LoginScreen extends StatelessWidget {
       stream: bloc.submitValid,
       builder: (context, snapshot) {
         return ElevatedButton(
-          onPressed: snapshot.data == true
+          onPressed: snapshot.hasData
               ? () {
-                  bloc.reciveText('hmm it seems u logged in :D');
+                  //bloc.reciveText('hmm it seems u logged in :D'); // it was for showing message with first method
                 }
               : null,
           style: ElevatedButton.styleFrom(primary: Colors.red),
@@ -78,8 +78,8 @@ class LoginScreen extends StatelessWidget {
       },
     );
   }
-
-  message(Bloc bloc) {
+  // it was my code that use two streambuilder to show message
+  /* message(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.submitValid,
       builder: (context, snapshot1) {
@@ -98,5 +98,5 @@ class LoginScreen extends StatelessWidget {
         }
       },
     );
-  }
+  } */
 }

@@ -5,9 +5,9 @@ import 'package:rxdart/rxdart.dart';
 class Bloc with Validator {
   final _emailController = StreamController<String>.broadcast();
   final _passwordController = StreamController<String>.broadcast();
-  final _textController = StreamController<String>.broadcast();
+  //final _textController = StreamController<String>.broadcast();
   // add to stream
-  Function(String) get reciveText => _textController.sink.add;
+  //Function(String) get reciveText => _textController.sink.add;
   Function(String) get changeEmail => _emailController.sink.add;
   get changePassword => _passwordController.sink.add;
   // access to stream
@@ -15,19 +15,9 @@ class Bloc with Validator {
       _emailController.stream.transform(validateEmail);
   Stream<String> get passwordvalidation =>
       _passwordController.stream.transform(validatePassword);
-  Stream<bool> get submitValid => Rx.combineLatest2(
-        emailvalidation,
-        passwordvalidation,
-        (a, b) {
-          if (a != null && b != null) {
-            return true;
-          } else {
-            return false;
-          }
-        },
-      );
-  Stream<String> get accesstext =>
-      _textController.stream.transform(validateText);
+  Stream<bool> get submitValid =>
+      Rx.combineLatest2(emailvalidation, passwordvalidation, (a, b) => true);
+  //Stream<String> get accesstext =>_textController.stream.transform(validateText);
 
   dispose() {
     _emailController.close();
