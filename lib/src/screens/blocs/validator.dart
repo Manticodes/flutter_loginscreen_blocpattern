@@ -20,9 +20,9 @@ class Validator {
       }
     },
   );
-  /* final validateText = StreamTransformer<String, String>.fromHandlers(
+  final validateText = StreamTransformer<String, String>.fromHandlers(
     handleData: (data, sink) {
       sink.add(data);
     },
-  ); */
+  );
 }
