@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'blocs/bloc.dart';
+import '../screens/blocs/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Scaffold(
       appBar: AppBar(title: Text('Log me in ')),
       body: Container(
         margin: EdgeInsets.all(20),
         child: Column(children: [
-          emailField(),
-          passwordField(),
+          emailField(bloc),
+          passwordField(bloc),
           SizedBox(
             height: 20,
           ),
@@ -22,7 +24,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  emailField() {
+  emailField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.emailvalidation,
       builder: (context, snapshot) {
@@ -41,7 +43,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  passwordField() {
+  passwordField(Bloc bloc) {
     return StreamBuilder(
       stream: bloc.passwordvalidation,
       builder: (context, snapshot) {
@@ -58,11 +60,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  submitbutton() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text('login'),
-      style: ElevatedButton.styleFrom(primary: Colors.red),
-    );
+  submitbutton(Bloc bloc) {
+    return StreamBuilder(stream:bloc.submitValid ,builder: (context , snapshot){},)
   }
 }

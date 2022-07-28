@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'validator.dart';
+import 'package:rxdart/rxdart.dart';
 
 class Bloc with Validator {
   final _emailController = StreamController<String>();
@@ -12,11 +13,13 @@ class Bloc with Validator {
       _emailController.stream.transform(validateEmail);
   Stream<String> get passwordvalidation =>
       _passwordController.stream.transform(validatePassword);
+  Stream<bool> get submitValid =>
+      Rx.combineLatest2(emailvalidation, passwordvalidation, (e, p) => true);
 
   dispose() {
     _emailController.close();
     _passwordController.close();
   }
 }
-
-final bloc = Bloc();
+// this line removed because im implementing bloc with provider
+//final bloc = Bloc();
