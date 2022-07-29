@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
             height: 40,
           ),
           submitbutton(bloc),
-          message(bloc), // it was  first method but i learned better method
+          message(bloc),
         ]),
       ),
     );
